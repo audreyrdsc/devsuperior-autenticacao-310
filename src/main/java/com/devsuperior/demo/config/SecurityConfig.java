@@ -14,28 +14,30 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
+//DEIXOU DE SER USADA A PARTIR DA IMPLANTAÇÃO DA AUTHORIZATION E RESOURCE CONFIG
+
     //Criptografia da senha
-    @Bean
-    public PasswordEncoder getPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    //@Bean
+    //public PasswordEncoder getPasswordEncoder() {
+    //    return new BCryptPasswordEncoder();
+    //}
 
-    @Bean  //Para liberar o H2
-    @Profile("test")
-    @Order(1)
-    SecurityFilterChain h2SecurityFilterChain(HttpSecurity http) throws Exception {
+    //@Bean  //Para liberar o H2
+    //@Profile("test")
+    //@Order(1)
+    //SecurityFilterChain h2SecurityFilterChain(HttpSecurity http) throws Exception {
 
-        http.securityMatcher(PathRequest.toH2Console()).csrf(csrf -> csrf.disable())
-                .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()));
-        return http.build();
-    }
+    //    http.securityMatcher(PathRequest.toH2Console()).csrf(csrf -> csrf.disable())
+    //            .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()));
+    //    return http.build();
+    //}
 
-    @Bean  //metodo para controle de acesso global
-    @Order(2)
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable()); //desabilita proteção contra ataques csrf - aplicação que grava dados na sessão, diferente de API que não guarda
-        http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll()); //configura permissão para as requisições - endpoints
-        return http.build();
-    }
+    //@Bean  //metodo para controle de acesso global
+    //@Order(2)
+    //public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    //    http.csrf(csrf -> csrf.disable()); //desabilita proteção contra ataques csrf - aplicação que grava dados na sessão, diferente de API que não guarda
+    //    http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll()); //configura permissão para as requisições - endpoints
+    //    return http.build();
+    //}
 
 }
